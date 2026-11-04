@@ -1,0 +1,18 @@
+﻿services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: campusfix
+      POSTGRES_PASSWORD: local_dev_only
+      POSTGRES_DB: usage_analytics
+    ports:
+      - "127.0.0.1:55433:5432"
+    volumes:
+      - usage_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U campusfix -d usage_analytics"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+volumes:
+  usage_pgdata:

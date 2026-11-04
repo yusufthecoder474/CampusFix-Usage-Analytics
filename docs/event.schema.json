@@ -1,0 +1,33 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CampusFix Usage Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "event_name",
+    "event_timestamp",
+    "user_id",
+    "session_id",
+    "schema_version",
+    "properties"
+  ],
+  "properties": {
+    "event_id": {"type": "string", "format": "uuid"},
+    "event_name": {
+      "type": "string",
+      "enum": [
+        "issue_created",
+        "issue_status_changed",
+        "issue_reopened",
+        "issue_closed",
+        "user_login"
+      ]
+    },
+    "event_timestamp": {"type": "string", "format": "date-time"},
+    "user_id": {"type": "string", "minLength": 1},
+    "session_id": {"type": "string", "minLength": 1},
+    "schema_version": {"const": "1.0"},
+    "properties": {"type": "object"}
+  }
+}
